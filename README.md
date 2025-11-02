@@ -45,10 +45,67 @@
 ## Installation
 
 ### 1. Requirements
-```bash
 Python 3.8+
 Supabase account (free)
 
-### 1. Clone the repository
+### 2. Clone the repository
 git clone <repository-url>
 cd personal-finance-app
+
+###3. Install dependencies
+pip install -r requirements.txt
+
+###4. Configure Supabase
+A. Create a Supabase project
+Go to supabase.com
+Create a new project
+Copy the project URL and anon key
+
+B. Run the SQL schema
+In the Supabase dashboard, go to SQL Editor
+Copy all the content from schema_supabase.sql
+Execute the script
+
+C. Enable authentication
+Go to Authentication > Providers
+Enable the Email provider
+Set redirect URLs:
+http://localhost:8501
+Your production domain
+
+###5. Configure secrets
+Create a .streamlit/secrets.toml file:
+
+[supabase]
+url = "YOUR_SUPABASE_URL"
+key = "YOUR_SUPABASE_ANON_KEY"
+Important: Add this to your .gitignore:
+
+.streamlit/secrets.toml
+
+###6. Run the app
+streamlit run app.py
+The app will be available at http://localhost:8501.
+
+Deploying on Streamlit Cloud
+1. Prepare the repository
+git init
+git add .
+git commit -m "Initial commit"
+git push origin main
+
+2. Deploy to Streamlit Cloud
+Go to share.streamlit.io
+Connect your GitHub repository
+Select the main branch
+Main file: app.py
+3. Configure secrets
+In the Streamlit Cloud dashboard:
+Go to Settings > Secrets
+Paste the content of .streamlit/secrets.toml
+
+4. Update Supabase redirect URLs
+
+In the Supabase dashboard:
+Authentication > URL Configuration
+Add your app URL: https://your-app.streamlit.app
